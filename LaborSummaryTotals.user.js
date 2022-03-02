@@ -207,6 +207,7 @@ function buildDisplayTable(){
         tRate = (totalDPMOUnits/totalOBUnitsValue)* dpmoMultiplier;
     }
     tRate = tRate.toFixed(noDecimals);
+    tRate = tRate.toLocaleString("en-US");
     displayTableArray.push(["DPMO", tRate]);
 	// BCC
     tRate = 0;
