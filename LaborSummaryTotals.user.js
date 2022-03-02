@@ -59,7 +59,7 @@ var packNAIndex = 1;
 // --------------- Timing and Sequnecing
 var milliToSeconds = 1000;
 var dpmoMultiplier = 1000000;
-var readTableDelay = 3;
+var readTableDelay = 2;
 
 // ----------------- Math Vars
 var ibZeroRate = 150;
@@ -206,7 +206,7 @@ function buildDisplayTable(){
     if(totalOBUnitsValue > 0){
         tRate = (totalDPMOUnits/totalOBUnitsValue)* dpmoMultiplier;
     }
-    tRate = tRate.toFixed(noDecimals);
+    tRate = parseInt(tRate.toFixed(noDecimals));
     tRate = tRate.toLocaleString("en-US");
     displayTableArray.push(["DPMO", tRate]);
 	// BCC
