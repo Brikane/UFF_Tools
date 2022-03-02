@@ -98,7 +98,7 @@ var quoteInString = "\"";
 
 (function() {
     'use strict';
-    addSettingsBox();
+    // addSettingsBox();
 
     setTimeout(function(){ initLoadData(); }, (readTableDelay*milliToSeconds));
 
@@ -109,13 +109,13 @@ var quoteInString = "\"";
 // --------------------- Sequencign and Timeing
 
 function initLoadData(){
-
+/*
     if(document.getElementById(cysCheckBoxID).checked){
         doMatchCYS = true;
     }else{
         doMatchCYS = false;
     }
-
+*/
     collectArrays();
     parseInfo();
 
