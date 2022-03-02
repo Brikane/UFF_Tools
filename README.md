@@ -1,3 +1,3 @@
 # UFF_Tools
 
-https://github.com/Brikane/UFF_Tools/blob/main/LaborSummaryTotals.user.js
+<a href="https://github.com/Brikane/UFF_Tools/raw/main/LaborSummaryTotals.user.js">AFTLite Summary Totals Table</a>
