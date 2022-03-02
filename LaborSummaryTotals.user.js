@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         LaborSummaryTotals
 // @namespace    http://tampermonkey.net/
-// @version      0.1
+// @version      0.2 3/2/2022
 // @description  Roll up Labor Summery into totals, OB, IB< Indirect, UPH
 // @author       brikane @ UIL1
 // @match        https://aftlite-na.amazon.com/labor_tracking/labor_summary*
@@ -29,15 +29,8 @@ var ibIndirectHours = 0;
 var stnIndirectHours = 0;
 var totalExtraHours = 0;
 
-// ----------- Matching CYS Due to Bugs
-var doMatchCYS = true;
+var totalDPMOUnits = 0;
 
-var cysBuggedFunctionsKeysAdd = ["OB"];
-var totalCYSBuggedHours = 0;
-var totalCYSBuggedUnits = 0;
-
-var matchCYSMessage = "CYS does not include \"OB\" (02/28/2022)";
-var cysCheckBoxID = "matchCYSBugsCheckbox";
 
 //-------------- Keys
 var tableKey = "labor_summary_table";
@@ -65,7 +58,7 @@ var packNAIndex = 1;
 
 // --------------- Timing and Sequnecing
 var milliToSeconds = 1000;
-
+var dpmoMultiplier = 1000000;
 var readTableDelay = 3;
 
 // ----------------- Math Vars
@@ -109,19 +102,10 @@ var quoteInString = "\"";
 // --------------------- Sequencign and Timeing
 
 function initLoadData(){
-/*
-    if(document.getElementById(cysCheckBoxID).checked){
-        doMatchCYS = true;
-    }else{
-        doMatchCYS = false;
-    }
-*/
     collectArrays();
     parseInfo();
 
     insertDisplayTable();
-
-
 }
 
 //--------------------------- Core Functions
@@ -198,13 +182,8 @@ function parseInfo(){
         if(lastFirstElNoBlank == packKey){
             if(myTableArray[i][packNAIndex] == packNAKey){
                 totalOBUnitsValue -= parseFloat(myTableArray[i][unitsIndexKey]);
+                totalDPMOUnits += parseFloat(myTableArray[i][unitsIndexKey]);
             }
-        }
-
-        // CYS Bug Adjustment
-        if(cysBuggedFunctionsKeysAdd.includes(firstEl)){                         // Extra Hours
-            totalCYSBuggedHours += parseFloat(myTableArray[i][hoursIndexKey]);
-            totalCYSBuggedUnits += parseFloat(myTableArray[i][unitsIndexKey]);
         }
 
     }
@@ -212,10 +191,6 @@ function parseInfo(){
     totalHoursValue -= totalExtraHours;
     if(totalOBHours > 0) obRateValue = totalOBUnitsValue / totalOBHours;
     if(totalIBHours > 0) ibRateValue = totalIBUnitsValue / totalIBHours;
-
-    if(doMatchCYS){
-        adjustForCYSBugs();
-    }
 }
 
 function buildDisplayTable(){
@@ -226,6 +201,13 @@ function buildDisplayTable(){
     tRate = tRate.toFixed(numDecimals);
     displayTableArray.push(["UPH", tRate]);
 
+    // DPMO
+    tRate = 0;
+    if(totalOBUnitsValue > 0){
+        tRate = (totalDPMOUnits/totalOBUnitsValue)* dpmoMultiplier;
+    }
+    tRate = tRate.toFixed(noDecimals);
+    displayTableArray.push(["DPMO", tRate]);
 	// BCC
     tRate = 0;
     if(bccHoursValue > 0){
@@ -308,22 +290,15 @@ function resetValues(){
 
     totalCYSBuggedHours = 0;
     totalCYSBuggedUnits = 0;
-}
 
-function adjustForCYSBugs(){
-    totalHoursValue -= totalCYSBuggedHours;
-    obIndirectHours -= totalCYSBuggedHours;
-    totalOBHours -= totalCYSBuggedHours;
+    totalDPMOUnits = 0;
 }
-
 
 //------------------------ Util Fuctions
 function calcUPH(hours, obVol, ibVol, ibRate){
     if (ibRate == 0 ) ibRate = ibZeroRate;
     return  obVol / (hours -( (ibVol-obVol) /ibRate));
 }
-
-
 
 //-------------- Diplay Fuctions
 function insertDisplayTable(){
@@ -338,28 +313,6 @@ function insertDisplayTable(){
 }
 
 //--------- Display
-function addSettingsBox(){
-    zNode = document.createElement ('div');
-    zNode.innerHTML = '<input id="'+ cysCheckBoxID+'" type="checkbox"> Adjust For CYS Bugs </input>'
-    + '<button id="RunButton" type="button" > Refresh Totals </button>' + '<p>' + matchCYSMessage + '</p>'
-                    ;
-    zNode.setAttribute ('id', 'myContainer');
-
-    document.body.appendChild (zNode);
-
-    //--- Activate the newly added button.
-    document.getElementById ("RunButton").addEventListener (
-        "click", ButtonClickAction, false
-    );
-
-    document.getElementById(cysCheckBoxID).checked = false;
-}
-function addRow(msg){
-    var myContainer = document.getElementById('myContainer');
-    var zNode = document.createElement ('p');
-    zNode.innerHTML = msg;
-    myContainer.appendChild (zNode);
-}
 
 function buildTableFromArray(tableId, tableArray, hasHeaders){
     var rtnHTML = "";
@@ -400,68 +353,9 @@ function buildTableFromArray(tableId, tableArray, hasHeaders){
 }
 
 
-
-// -------------------- Display functionality
-function ButtonClickAction (zEvent) {
-    //curAALogin = inputLoginNode.value;
-    collectArrays();
-    // printTable();
-    initLoadData();
-    parseInfo();
-    // printHoursAndUnits();
-}
-
-// ----------------------- Testing functions
-function printHoursAndUnits(){
-    addRow("Hours: " + totalHoursValue);
-    addRow("OB Units: " + totalOBUnitsValue);
-    addRow("IB Units: " + totalIBUnitsValue);
-    addRow("IB Rate: " + ibRateValue);
-    //if(totalHoursValue > 0){
-        addRow("?_UPH: " + calcUPH(totalHoursValue,totalOBUnitsValue,totalIBUnitsValue,ibRateValue));
-    //}
-}
-
-
-function printTable(){
-    var tMsg = "ERROR";
-    tMsg = "Table: " + myTableArray.length
-    addRow(tMsg);
-
-    for (let i = 0; i < myTableArray.length; i++) {
-
-        tMsg = "" + i + ": ";
-        myTableArray[i].forEach(element => {
-            tMsg = tMsg + element + "," ;
-        });
-        addRow(tMsg);
-    }
-
-
-}
-
 // ----- CSS Style
     //--- Style our newly added elements using CSS.
     GM_addStyle ( `
-        #myContainer {
-            position:               absolute;
-            top:                    100px;
-            right:                   0;
-            font-size:              20px;
-            background:             orange;
-            border:                 3px outset black;
-            margin:                 5px;
-            opacity:                0.9;
-            z-index:                1100;
-            padding:                5px 20px;
-        }
-        #myButton {
-            cursor:                 pointer;
-        }
-        #myContainer p {
-            color:                  red;
-            background:             white;
-        }
         #uphTotalsTable, .totalsTableClass {
             border: 1px solid black;
             border-collapse: collapse;
@@ -482,6 +376,7 @@ function printTable(){
 
         Rates to Display
         o	BCC
+            DPMO
         o	Total indirect
         o	UPH
         o	OB Indirect
