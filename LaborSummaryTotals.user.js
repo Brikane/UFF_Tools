@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         LaborSummaryTotals
 // @namespace    http://tampermonkey.net/
-// @version      0.2 3/2/2022
+// @version      0.3 3/4/2022
 // @description  Roll up Labor Summery into totals, OB, IB< Indirect, UPH
 // @author       brikane @ UIL1
 // @match        https://aftlite-na.amazon.com/labor_tracking/labor_summary*
@@ -65,6 +65,7 @@ var readTableDelay = 2;
 var ibZeroRate = 150;
 var numDecimals = 1;
 var noDecimals = 0
+var nnumRatioDecimals = 2;
 
 //--------- display Vars
 var zNode;
@@ -270,6 +271,14 @@ function buildDisplayTable(){
     tRate = totalOBUnitsValue;
     tRate = tRate.toLocaleString("en-US");
     displayTableArray.push(["OB Vol.", tRate]);
+
+     // IB/OB Ratio
+    tRate = 0;
+    if(totalOBUnitsValue >0){
+        tRate = totalIBUnitsValue/totalOBUnitsValue;
+    }
+    tRate = tRate.toFixed(nnumRatioDecimals);
+    displayTableArray.push(["IB:OB Ratio", tRate]);
 }
 
 function resetValues(){
