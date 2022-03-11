@@ -40,7 +40,7 @@ var displayInsertKey = "beforeBegin";
 var hoursIndexKey = 3;
 var unitsIndexKey = 2;
 var unitOBidKey = ["pack"];
-var unitIBidKeys = ["stow", "receive2_direct", "receive_direct", "receive_ced" ];
+var unitIBidKeys = ["stow", "receive2_direct", "receive_direct", "receive_ced", "transform", "transform_pick"];
 
 var ibFunctionKeys = ["stow", "receive2_direct", "receive_direct", "IBINDIRECT", "SPECINDIRECT", "receive2" ];
 var obFunctionKeys = ["pack", "BATCHING", "pack_problem", "OB", "OBINDIRECT"];
@@ -271,6 +271,12 @@ function buildDisplayTable(){
     tRate = totalOBUnitsValue;
     tRate = tRate.toLocaleString("en-US");
     displayTableArray.push(["OB Vol.", tRate]);
+
+     // IB Units
+    tRate = 0;
+    tRate = totalIBUnitsValue;
+    tRate = tRate.toLocaleString("en-US");
+    displayTableArray.push(["IB Vol.", tRate]);
 
      // IB/OB Ratio
     tRate = 0;
