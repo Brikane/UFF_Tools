@@ -92,6 +92,7 @@
 
     var totalsMultiTableID = "uphMultiTotalsTable";
     var totalsMultiTableClass = "uphMultiTotalsTable";
+    var graphSelectionBoxId = "graphSelectionBoxID";
 
     var tableEnd = "</table>";
 
@@ -230,7 +231,8 @@
             }
         }else if (isRunningValue == isRunningDisplayOnly){
             retrieveData();
-            insertChart(getChartDataPoints(1), getChartDataPoints(0));
+            insertGraphControls();
+            insertChart(getChartDataPoints(1), getChartDataPoints(0), "UPH");
             displayMultiTable();
         }
     }
@@ -239,6 +241,8 @@
         document.getElementsByTagName(nextElementAfterDisplayTagKey)[0].insertAdjacentHTML(displayInsertKey,
             buildTableFromArray(totalsMultiTableID,totalsMultiTableArray,false) );
     }
+
+
 
     //------------------------ Save and Read Functions
 
@@ -628,10 +632,11 @@
 
     function getChartLabelPoints(){
         var rtnArr = [];
-        for (let i = 1; i < totalsMultiTableArray[0].length; i++) {
-            rtnArr.push(totalsMultiTableArray[0][i]);
+        if(totalsMultiTableArray.length > 0){
+            for (let i = 1; i < totalsMultiTableArray[0].length; i++) {
+                rtnArr.push(totalsMultiTableArray[0][i]);
+            }
         }
-
         return rtnArr;
     }
 
@@ -698,6 +703,16 @@
         return timeBlock;
     }
 
+    function cleanDataToNumber(tArray){
+        
+        for (let index = 0; index < tArray.length; index++) {
+            tArray[index] = parseFloat(tArray[index].replace(/,/g, ''));
+        }
+
+        return tArray;
+
+    }
+
     //-------------- Diplay Fuctions
     function insertDisplayTable(){
         try{
@@ -750,14 +765,14 @@
         return rtnHTML;
     }
 
-    function insertChart(dataPoints, tLabels){
+    function insertChart(dataPoints, tLabels, tTitle){
         document.getElementsByTagName(nextElementAfterDisplayTagKey)[0].insertAdjacentHTML(displayInsertKey,
             htmlInjection );
 
         var chartData = {
             labels: tLabels,
             datasets: [{
-                label: "UPH",
+                label: tTitle,
                 data: dataPoints,
             }]
         };
@@ -781,14 +796,50 @@
         
     }
 
+
+
+    function createGraphDropDownHTML(){
+        var rtnHTML = '<select name="'+ graphSelectionBoxId + '" id="' + graphSelectionBoxId + '">';
+        rtnHTML +=  newLineKey;
+        
+        for (let i = 1; i < totalsMultiTableArray.length; i++) {
+            rtnHTML += '<option value="' + i + '">'+ totalsMultiTableArray[i][0] + '</option>' + newLineKey;
+        }
+        rtnHTML +=" </select>";
+     
+        return rtnHTML;
+    }
+
     function insertControls(){
+        
+
         document.getElementsByTagName(nextElementAfterDisplayTagKey)[0].insertAdjacentHTML(displayInsertKey,
             controlHTMLInjection );
-
+        
+        
         document.getElementById (runTodayGraphButtonID).addEventListener (
             "click", runTodayButtonAction, false
         );
+
+
     }
+
+    function insertGraphControls(){
+        if (isRunningValue == isRunningDisplayOnly){
+            document.getElementsByTagName(nextElementAfterDisplayTagKey)[0].insertAdjacentHTML(displayInsertKey, createGraphDropDownHTML() );
+    
+            document.getElementById (graphSelectionBoxId).addEventListener (
+             "change", graphSelectionDidChange, false
+            );
+        }
+    }
+
+    function graphSelectionDidChange(){
+        var tValue = document.getElementById (graphSelectionBoxId).value; 
+        insertChart(cleanDataToNumber(getChartDataPoints(tValue)), getChartDataPoints(0), totalsMultiTableArray[tValue][0]);
+    }
+
+
 
 
 
