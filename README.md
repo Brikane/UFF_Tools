@@ -1,7 +1,9 @@
 # UFF_Tools
 
 
-<b><a href="https://github.com/Brikane/UFF_Tools/raw/main/AutoRetrackAFTLite.user.js"> AFTLite ReCode Script</a></b>
+<b><a href="https://github.com/Brikane/UFF_Tools/raw/main/AutoRetrackAFTLite.user.js"> AFTLite ReCode Script Downtime version</a></b>
+<b><a href="https://github.com/Brikane/UFF_Tools/raw/main/AutoRetrackAFTLiteIndirect.user.js"> AFTLite ReCode Script Indirect version</a></b>
+
 <p> Requires find people tools from jgray's repository </p>
 <p>-----------------</p>
 <a href="https://github.com/Brikane/UFF_Tools/raw/main/LaborSummaryTotals.user.js">AFTLite Summary Totals Table</a>
