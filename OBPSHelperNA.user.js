@@ -1,7 +1,7 @@
     // ==UserScript==
     // @name         OBPSHelperNA
     // @namespace    https://github.com/dvglenn/TMScripts
-    // @version      0.2
+    // @version      0.3 05/14/2022
     // @description  Print out pick list IDs for Manual bigs assignments
     // @author       dvglenn@ Brikane adapted for aftlite-na
     // @match        https://aftlite-na.amazon.com/wms/pack_by_picklist*
@@ -46,7 +46,7 @@
             console.log("ASIN: " + ASIN);
 
             //asin_or_upc
-            var button_addASIN = createButton("Add " + ASIN);
+            var button_addASIN = createButton("Add:" + ASIN );
             button_addASIN.onclick = function () {
                 document.getElementsByName("asin_or_upc")[0].value = ASIN;
             };
@@ -57,7 +57,7 @@
             console.log("packedQuantity: " + packedQuantity);
             if (pickListQuantity>packedQuantity) {
                 var spans2 = document.getElementsByTagName("form");
-                spans2[2].appendChild(button_addASIN);
+                spans2[1].appendChild(button_addASIN);
             }
 
 
