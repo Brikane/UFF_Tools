@@ -1,14 +1,14 @@
 # UFF_Tools
 
 
-<H2><a href="https://github.com/Brikane/UFF_Tools/raw/main/AutoRetrackAFTLite.user.js"> AFTLite ReCode Script</a></h2>
+<b><a href="https://github.com/Brikane/UFF_Tools/raw/main/AutoRetrackAFTLite.user.js"> AFTLite ReCode Script</a></b>
 <p> Requires find people tools from jgray's repository </p>
 
 <a href="https://github.com/Brikane/UFF_Tools/raw/main/LaborSummaryTotals.user.js">AFTLite Summary Totals Table</a>
 <p>-----------------</p>
 <a href="https://github.com/Brikane/UFF_Tools/raw/main/LaborSummaryTotals%20MultiPulls%20V0_1.user.js">AFTLite Summary Graph</a>
 
-<H2><a href="hhttps://github.com/Brikane/UFF_Tools/raw/main/LaborSummaryTotals.user.js"> AFTLite OBPS Script</a></h2>
+<b><a href="https://github.com/Brikane/UFF_Tools/raw/main/LaborSummaryTotals.user.js"> AFTLite OBPS Script</a></b>
 
 
 <H2> Other Scripts </h2>
