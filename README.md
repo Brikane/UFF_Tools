@@ -10,9 +10,13 @@
 <p>-----------------</p>
 <p> <a href="https://github.com/Brikane/UFF_Tools/raw/main/LaborSummaryTotals%20MultiPulls%20V0_1.user.js">AFTLite Summary Graph</a></p>
 <p>-----------------</p>
+<h1>OB PS Tools</h1>
+<p>-----------------</p>
+<p><b><a href="https://github.com/Brikane/UFF_Tools/raw/main/AFTLiteButtonsOnAmazonSearch.user.js"> Add AFTLite Buttons to Amazon search</a></b></p>
+
 <p><b><a href="https://github.com/Brikane/UFF_Tools/raw/main/LaborSummaryTotals.user.js"> AFTLite OBPS Script</a></b></p>
 <p>-----------------</p>
-<p><b><a href="https://github.com/Brikane/UFF_Tools/raw/main/AFTLiteSearchAmazon.user.js"> AFTLite Search on Amazon</a></b></p>
+<p><b><a href="https://github.com/Brikane/UFF_Tools/raw/main/AFTLiteSearchAmazon.user.js"> Amamzon Search from AFTLite Inventory</a></b></p>
 
 
 
