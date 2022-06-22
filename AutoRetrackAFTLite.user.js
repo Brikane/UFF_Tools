@@ -1,5 +1,5 @@
     // ==UserScript==
-    // @name         AutoRetrackAFTLite
+    // @name         AutoRetrackAFTLiteDowntime
     // @namespace    http://tampermonkey.net/
     // @version      1.0 4/15/2022 @UIL1
     // @description  Auto re-labor tracks AA at specific time points
@@ -11,8 +11,8 @@
 
     // Setting Vars
     // Code to trigger, time to trigger after in mins, and code to recode to
-    var recodeDefs = [["pack", 9, "downtime" ],
-                      ["pack_problem", 9, "downtime" ],
+    var recodeDefs = [["pack", 25, "downtime" ],
+                      ["pack_problem", 25, "downtime" ],
                       ["receive/receive2_direct", 9, "downtime" ],
                       ["receive_direct", 9, "downtime" ],
                       ["stow", 9, "downtime" ],   
