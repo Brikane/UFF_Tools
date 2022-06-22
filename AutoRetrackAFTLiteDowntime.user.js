@@ -12,11 +12,11 @@
     // Setting Vars
     // Code to trigger, time to trigger after in mins, and code to recode to
     var recodeDefs = [["pack", 25, "downtime" ],
-                      ["pack_problem", 25, "downtime" ],
-                      ["receive/receive2_direct", 9, "downtime" ],
-                      ["receive_direct", 9, "downtime" ],
-                      ["stow", 9, "downtime" ],   
-                      ["stow_move", 9, "downtime" ],                   
+                      ["pack_problem", 9, "OBINDIRECT" ],
+                      ["receive/receive2_direct", 9, "IBINDIRECT" ],
+                      ["receive_direct", 9, "IBINDIRECT" ],
+                      ["stow", 9, "IBINDIRECT" ],   
+                      ["stow_move", 9, "IBINDIRECT" ],                   
                     ];
 
     var reloadSecondsTime = 60; // seconds
