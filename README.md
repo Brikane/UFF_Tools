@@ -25,7 +25,7 @@
 
 <a href="https://github.com/Brikane/UFF_Tools/raw/main/DailyDetailHelper.user.js"> DailyDetailHelper </a>
 <a href="https://github.com/Brikane/UFF_Tools/raw/main/DateInputHelper.user.js"> DateInputHelper </a>
-<a href=""> TEXT </a>
+<a href="https://github.com/Brikane/UFF_Tools/raw/main/FindPeopleTools.user.js"> FindPeopleTools </a>
 <a href=""> TEXT </a>
 <a href=""> TEXT </a>
 
