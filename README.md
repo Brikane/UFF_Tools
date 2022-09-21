@@ -23,8 +23,8 @@
 <p> the jgray0705 scripts gitup with the scripts went down here are links to re-posts of those scripts </p>
 <a href=""> TEXT </a>
 
-<a href="https://github.com/Brikane/UFF_Tools/raw/main/DailyDetailHelper.user.js"> TEXT </a>
-<a href=""> TEXT </a>
+<a href="https://github.com/Brikane/UFF_Tools/raw/main/DailyDetailHelper.user.js"> DailyDetailHelper </a>
+<a href="https://github.com/Brikane/UFF_Tools/raw/main/DateInputHelper.user.js"> DateInputHelper </a>
 <a href=""> TEXT </a>
 <a href=""> TEXT </a>
 <a href=""> TEXT </a>
