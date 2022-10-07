@@ -1,8 +1,8 @@
     // ==UserScript==
-    // @name         LaborSummary Totals V1.2
+    // @name         LaborSummary Totals V1.4
     // @namespace    http://tampermonkey.net/
     // @version      1.2 04/06/2022
-    // @description  Shows totals table for current pull, pull by X hours, graphing with a totals table and an ICQA graph
+    // @description  Shows totals table for current pull, pull by X hours, graphing with a totals table and an ICQA graph, porject rate if end time is after NOW
     // @author       brikane @ UIL1
     // @match        https://aftlite-na.amazon.com/labor_tracking/labor_summary*
     // @icon         https://www.google.com/s2/favicons?domain=amazon.com
@@ -50,7 +50,7 @@
     var unitOBidKey = ["pack"];
     var unitIBidKeys = ["stow", "receive2_direct", "receive_direct", "receive_ced", "transform", "transform_pick"]; //"transform", "transform_pick"
 
-    var ibFunctionKeys = ["stow", "receive2_direct", "receive_direct", "IBINDIRECT", "SPECINDIRECT", "receive2" ];
+    var ibFunctionKeys = ["stow", "receive2_direct", "receive_direct", "IBINDIRECT", "SPECINDIRECT", "receive2", "transform", "transform_pick" ];
     var obFunctionKeys = ["pack", "BATCHING", "pack_problem", "OB", "OBINDIRECT", "skip", "SORTER" ];
     var ibIndirectFunctionKeys = ["IBINDIRECT", "adjust", "bulk_move", "cubiscan", "move-to", "receive_transfer", "stow_move", "update expiry"];
     var obIndirectFunctionKeys = ["BATCHING", "pack_problem", "OB", "OBINDIRECT","skip", "SORTER", "BATCHING"];
@@ -501,29 +501,90 @@
 
         totalsMultiRawDataArray.push(entryArray);
     }
+
+    // Current pull table
     function buildDisplayTable(){
         displayTableArray = [];
         var tRate = 0;
+        var doProject = false;
+        var projectionNum = 0.0;
+
+        // if()
+
+        var tElement = document.getElementById(endHourElID);
+        var eHour = parseInt(tElement.value, 10)+1;
+        var tElement = document.getElementById(startHourElID);
+        var sHour = parseInt(tElement.value, 10);
+        var nowHour = new Date().getHours();
+        var nowMin = new Date().getMinutes();
+        var postMins = 0.0;
+         if( eHour > nowHour){
+            doProject = true;
+            postMins = 60.0;
+            console.log("End after now " + eHour + " to " + nowHour + " from " + sHour + " min: " + nowMin + " after:" + postMins);
+         }else{
+            doProject = false; 
+            postMins = 0.0;
+            console.log("End before now " + eHour + " to " + nowHour+ " from " + sHour+ " min: " + nowMin);
+         }
+
+         var estVal = 0.0;
+         var preHours = (nowHour - sHour)*60.0;
+         
+         var curPercent = ((nowMin+preHours)/(preHours+postMins)); 
+         if(curPercent == 0.0) curPercent = 0.000001;
+         console.log("Percent: " + curPercent);
+          
+         // Titles
+         displayTableArray.push(["Category", "Actual", "Trending"]);
+
         // UPH
         tRate = calcUPH(totalHoursValue,totalOBUnitsValue,totalIBUnitsValue,ibRateValue);
+        estVal = tRate
+        if(doProject){
+            estVal = tRate/curPercent;
+        }
+        estVal = Number(estVal).toFixed(numDecimals);
+
         tRate = tRate.toFixed(numDecimals);
-        displayTableArray.push(["UPH", tRate]);
+        displayTableArray.push(["UPH", tRate, estVal]);
 
         // DPMO
         tRate = 0;
         if(totalOBUnitsValue > 0){
             tRate = (totalDPMOUnits/totalOBUnitsValue)* dpmoMultiplier;
         }
+        
         tRate = parseInt(tRate.toFixed(noDecimals));
         tRate = tRate.toLocaleString("en-US");
-        displayTableArray.push(["DPMO", tRate]);
+        displayTableArray.push(["DPMO", tRate, "-"]);
+
+
+        // Pack
+        tRate = 0;
+        tRate = totalOBUnitsValue/ (totalOBHours-obIndirectHours);
+
+        estVal = tRate
+        if(doProject){
+            estVal = tRate/curPercent;
+        }
+        estVal = Number(estVal).toFixed(noDecimals);
+        tRate = tRate.toFixed(noDecimals);
+        displayTableArray.push(["Pack", tRate, estVal]);
+
+
         // BCC
         tRate = 0;
         if(bccHoursValue > 0){
             tRate = bccUnitsValue/bccHoursValue;
         }
+        estVal = tRate
+        if(doProject){
+            estVal = tRate/curPercent;
+        }
+        estVal = Number(estVal).toFixed(noDecimals);
         tRate = tRate.toFixed(noDecimals);
-        displayTableArray.push(["BCC", tRate]);
+        displayTableArray.push(["BCC", tRate, estVal]);
 
         // Total Indirect
         tRate = 0;
@@ -531,8 +592,13 @@
         if(tHours > 0){
             tRate = totalOBUnitsValue/tHours;
         }
+        estVal = tRate
+        if(doProject){
+            estVal = tRate/curPercent;
+        }
+        estVal = Number(estVal).toFixed(noDecimals);
         tRate = tRate.toFixed(noDecimals);
-        displayTableArray.push(["Indirect", tRate]);
+        displayTableArray.push(["Indirect", tRate, estVal]);
 
         // OB Indirect
         tRate = 0;
@@ -540,8 +606,13 @@
             tRate = totalOBUnitsValue/obIndirectHours;
             console.log("OB Indirect: " + tRate + " hr: " + obIndirectHours + " units: " + totalOBUnitsValue);
         }
+        estVal = tRate
+        if(doProject){
+            estVal = tRate/curPercent;
+        }
+        estVal = Number(estVal).toFixed(noDecimals);
         tRate = tRate.toFixed(noDecimals);
-        displayTableArray.push(["OB Indirect", tRate]);
+        displayTableArray.push(["OB Indirect", tRate, estVal]);
 
         // OB Total
         tRate = 0;
@@ -549,42 +620,85 @@
         if(totalOBHours >0){
             tRate = totalOBUnitsValue/totalOBHours;
         }
+        estVal = tRate
+        if(doProject){
+            estVal = tRate/curPercent;
+        }
+        estVal = Number(estVal).toFixed(noDecimals);
         tRate = tRate.toFixed(noDecimals);
-        displayTableArray.push(["OB Total", tRate]);
+        displayTableArray.push(["OB Total", tRate, estVal]);
 
         // IB Indirect
         tRate = 0;
         if(ibIndirectHours >0){
             tRate = totalIBUnitsValue/ibIndirectHours;
         }
+        estVal = tRate
+        if(doProject){
+            estVal = tRate/curPercent;
+        }
+        estVal = Number(estVal).toFixed(noDecimals);
         tRate = tRate.toFixed(noDecimals);
-        displayTableArray.push(["IB Indirect", tRate]);
+        displayTableArray.push(["IB Indirect", tRate, estVal]);
 
         // IB Total
         tRate = 0;
         if(totalIBHours >0){
             tRate = totalIBUnitsValue/totalIBHours;
         }
+        estVal = tRate
+        if(doProject){
+            estVal = tRate/curPercent;
+        }
+        estVal = Number(estVal).toFixed(noDecimals);
         tRate = tRate.toFixed(noDecimals);
-        displayTableArray.push(["IB Total", tRate]);
+        displayTableArray.push(["IB Total", tRate, estVal]);
 
         // Downtime
+        /*
         tRate = 0;
         tRate = downtimeHours;
         tRate = tRate.toFixed(numDecimals);
-        displayTableArray.push(["Downtime", tRate]);
+        displayTableArray.push(["Downtime", tRate, "-"]);
+        */
+        // Pack
+        tRate = 0;
+        tRate = totalOBUnitsValue/ (totalOBHours-obIndirectHours);
+
+        estVal = tRate
+        if(doProject){
+            estVal = tRate/curPercent;
+        }
+        estVal = Number(estVal).toFixed(noDecimals);
+        tRate = tRate.toFixed(noDecimals);
+        displayTableArray.push(["Pack", tRate, estVal]);
 
         // OB Unitsx
         tRate = 0;
         tRate = totalOBUnitsValue;
+        
+        estVal = tRate
+        if(doProject){
+            estVal = tRate/curPercent;
+        }
+        estVal = Number(estVal).toFixed(noDecimals);
+        estVal = estVal.toLocaleString("en-US");
         tRate = tRate.toLocaleString("en-US");
-        displayTableArray.push(["OB Vol.", tRate]);
+       
+        displayTableArray.push(["OB Vol.", tRate, estVal]);
 
         // IB Units
         tRate = 0;
         tRate = totalIBUnitsValue;
+        
+        estVal = tRate
+        if(doProject){
+            estVal = tRate/curPercent;
+        }
+        estVal = Number(estVal).toFixed(noDecimals);
+        estVal = estVal.toLocaleString("en-US");
         tRate = tRate.toLocaleString("en-US");
-        displayTableArray.push(["IB Vol.", tRate]);
+        displayTableArray.push(["IB Vol.", tRate, estVal]);
 
         // IB/OB Ratio
         tRate = 0;
@@ -592,14 +706,16 @@
             tRate = totalIBUnitsValue/totalOBUnitsValue;
         }
         tRate = tRate.toFixed(nnumRatioDecimals);
-        displayTableArray.push(["IB:OB Ratio", tRate]);
+        displayTableArray.push(["IB:OB Ratio", tRate, "-"]);
 
         // total Hours
         tRate = 0;
         tRate = totalHoursValue;
 
         tRate = tRate.toFixed(nnumRatioDecimals);
-        displayTableArray.push(["Total Hrs", tRate]);
+        
+        displayTableArray.push(["Total Hrs", tRate, tRate]);
+        //displayTableArray.push(["Trending is ", "time left in ", "current hour"]);
     }
 
     function insertValuesIntoMultiArray(entryArray, firstValue, pushIndex, isFirstEntry){
