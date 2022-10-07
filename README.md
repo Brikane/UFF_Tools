@@ -6,7 +6,7 @@
 
 <p> Requires find people tools from jgray's repository </p>
 <p>-----------------</p>
-<p> <a href="https://github.com/Brikane/UFF_Tools/raw/main/LaborSummaryTotalsV1_2.user.js">AFTLite Summary Totals Table</a></p>
+<p> <a href="https://github.com/Brikane/UFF_Tools/raw/main/LaborSummaryTotals.user.js">AFTLite Summary Totals Table</a></p>
 
 <p>-----------------</p>
 <h1>OB PS Tools</h1>
