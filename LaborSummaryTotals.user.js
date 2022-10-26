@@ -1,6 +1,6 @@
     // ==UserScript==
     // @name         LaborSummary Totals V1.4
-    // @namespace    http://tampermonkey.net/
+    // @namespace    https://github.com/Brikane/UFF_Tools/*
     // @version      1.2 04/06/2022
     // @description  Shows totals table for current pull, pull by X hours, graphing with a totals table and an ICQA graph, porject rate if end time is after NOW
     // @author       brikane @ UIL1
@@ -48,7 +48,7 @@
     var hoursIndexKey = 3;
     var unitsIndexKey = 2;
     var unitOBidKey = ["pack"];
-    var unitIBidKeys = ["stow", "receive2_direct", "receive_direct", "receive_ced", "transform", "transform_pick"]; //"transform", "transform_pick"
+    var unitIBidKeys = ["stow", "receive2_direct", "receive_direct", "receive_ced", "transform", "transform_pick", "receive2"]; //"transform", "transform_pick"
 
     var ibFunctionKeys = ["stow", "receive2_direct", "receive_direct", "IBINDIRECT", "SPECINDIRECT", "receive2", "transform", "transform_pick" ];
     var obFunctionKeys = ["pack", "BATCHING", "pack_problem", "OB", "OBINDIRECT", "skip", "SORTER" ];
