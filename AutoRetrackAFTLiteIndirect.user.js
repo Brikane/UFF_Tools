@@ -11,7 +11,7 @@
 
     // Setting Vars
     // Code to trigger, time to trigger after in mins, and code to recode to
-    var recodeDefs = [                          // Delete the "//" in front of the ones you wish to activatek
+    var recodeDefs = [                          // Delete the "//" in front of the ones you wish to activate
                          ["ERROR",999,"ERROR"] // Leave alone
                      // ,["pack", 20, "OBINDIRECT" ]
                      // ,["pack_problem", 9, "OBINDIRECT" ]//
