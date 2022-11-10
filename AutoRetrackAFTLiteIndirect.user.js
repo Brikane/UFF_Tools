@@ -1,7 +1,7 @@
     // ==UserScript==
-    // @name         AutoRetrackAFTLiteIndirect
-    // @namespace    http://tampermonkey.net/
-    // @version      1.0 4/15/2022 @UIL1
+    // @name         AutoRetrackAFTLiteV1_5
+    // @namespace    https://github.com/Brikane/UFF_Tools
+    // @version      1.5 11/10/2022 @UIL1
     // @description  Auto re-labor tracks AA at specific time points
     // @author       brikane @UIL1 for UFF Amazon.com
     // @match        https://aftlite-na.amazon.com/labor_tracking/find_people*
@@ -11,12 +11,15 @@
 
     // Setting Vars
     // Code to trigger, time to trigger after in mins, and code to recode to
-    var recodeDefs = [["pack", 9, "OBINDIRECT" ],
-                      ["pack_problem", 9, "OBINDIRECT" ],
-                      ["receive/receive2_direct", 9, "IBINDIRECT" ],
-                      ["receive_direct", 9, "IBINDIRECT" ],
-                      ["stow", 9, "IBINDIRECT" ],   
-                      ["stow_move", 9, "IBINDIRECT" ],                   
+    var recodeDefs = [                          // Delete the "//" in front of the ones you wish to activatek
+                         ["ERROR",999,"ERROR"] // Leave alone
+                     // ,["pack", 20, "OBINDIRECT" ]
+                     // ,["pack_problem", 9, "OBINDIRECT" ]//
+                      //,["receive/receive2_direct", 9, "IBINDIRECT" ]
+                    //  ,["receive_direct", 9, "IBINDIRECT" ]
+                     // ,["stow", 9, "IBINDIRECT" ]
+                     // ,["stow_move", 9, "IBINDIRECT" ]
+                      //,["receive/receive_direct", 9, "IBINDIRECT" ]
                     ];
 
     var reloadSecondsTime = 60; // seconds
