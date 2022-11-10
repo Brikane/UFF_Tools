@@ -13,8 +13,8 @@
     // Code to trigger, time to trigger after in mins, and code to recode to
     var recodeDefs = [                          // Delete the "//" in front of the ones you wish to activate
                          ["ERROR",999,"ERROR"] // Leave alone
-                     // ,["pack", 20, "OBINDIRECT" ]
-                     // ,["pack_problem", 9, "OBINDIRECT" ]//
+                      ,["pack", 20, "OBINDIRECT" ]
+                      ,["pack_problem", 9, "OBINDIRECT" ]//
                       //,["receive/receive2_direct", 9, "IBINDIRECT" ]
                     //  ,["receive_direct", 9, "IBINDIRECT" ]
                      // ,["stow", 9, "IBINDIRECT" ]
