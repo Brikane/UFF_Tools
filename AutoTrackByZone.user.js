@@ -86,7 +86,7 @@ function parseReCodes(){
                 const jEl = retrackSettings[j];
                 if(jEl[0]== tLocal && jEl[1] == tCode && jEl[2] < tTime){
                        doRecode = true;
-                       reCodeArr.push(tLogin,jEl[3]);
+                       reCodeArr.push([tLogin,jEl[3]]);
                 }
             }
 
