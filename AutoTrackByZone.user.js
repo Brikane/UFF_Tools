@@ -20,6 +20,7 @@ var retrackSettings = [
     //,["c", "pack", 10, "OBINDIRECT" ]
     //,["a", "pack", 10, "T_OBINDIRECT" ]
     //,["b", "pack", 10, "T_OBINDIRECT" ]
+    //,["","asm/indirect",0,"asm"]
 ];
 /* 
     ZONES:
