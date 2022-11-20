@@ -29,7 +29,9 @@ var retrackSettings = [
     "a" ambient wil include anything in ambient
 */
 
-var zoneCodes = [["ambient", "a"], ["chilled", "c"], ["bigs", "b"], ["frozen", "f"]];
+var reloadSecondsTime = 120; // seconds
+
+// var zoneCodes = [["ambient", "a"], ["chilled", "c"], ["bigs", "b"], ["frozen", "f"]];
 
 // --- HTML Ids and tag code 
 var table_id = "recent_event_table";
@@ -58,7 +60,7 @@ var milliToSeconds = 1000;
         implementRecode();
     }, (baseWaitTime*milliToSeconds));
 
-
+    setTimeout(function(){   document.location.reload();}, (reloadSecondsTime*milliToSeconds));
 })();
 
 // --------------------- Script Specific FUNCTIONS -----------------
