@@ -9,6 +9,7 @@
 <p><b><a href="https://github.com/Brikane/UFF_Tools/raw/main/RePosts/AFTLiteTabTitles.user.js "> AFTLite Tab Titles </a></b></p>
 
 <h2>UPH Tracking</h2>
+<p><b><a href="https://github.com/Brikane/UFF_Tools/raw/main/LaborSummaryTotals.user.js ">Labor Summary Table with Trending</a></b></p>
 
 <h2>Outbound Problem Solve</h2>
 
@@ -46,10 +47,10 @@
 <p>-----------------</p>
 <h1>Scripts For UFF Ops ONLY</h1>
 
-<p><b><a href="https://github.com/Brikane/UFF_Tools/raw/main/AutoRetrackAFTLite.user.js"> AFTLite ReCode Script Downtime version</a></b></p>
-<p> <b><a href="https://github.com/Brikane/UFF_Tools/raw/main/AutoRetrackAFTLiteIndirect.user.js"> AFTLite ReCode Script Indirect version</a></b></p>
+<p><b><a href="https://github.com/Brikane/UFF_Tools/raw/main/AutoTrackByZone.user.js"> AFTLite ReCode Script By Zone Version</a></b></p>
+<p> <b><a href="https://github.com/Brikane/UFF_Tools/raw/main/AutoRetrackAFTLiteIndirect.user.js"> AFTLite ReCode Script Indirect versioVersion</a></b></p>
 
-<p> Requires find people tools from jgray's repository </p>
+<p> Requires find people tools from above </p>
 <p>-----------------</p>
 <p> <a href="https://github.com/Brikane/UFF_Tools/raw/main/LaborSummaryTotals.user.js">AFTLite Summary Totals Table</a></p>
 
