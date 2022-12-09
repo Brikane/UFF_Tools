@@ -35,7 +35,12 @@
 <a href="https://github.com/Brikane/UFF_Tools/raw/main/RePosts/BlindCountsDueDate.user.js"> BBC Due Date Tool </a>
 <a href=""> TEXT </a>
 <p></p>
-<h2></h2>
+<h2>Personal Retracking</h2>
+<p>EXIT Page or tun OFF Script when leaving work</p>
+<a href="https://github.com/Brikane/UFF_Tools/raw/main/AutoASM.user.js"> Self Auto ASM </a>
+<a href="https://github.com/Brikane/UFF_Tools/raw/main/AutoOBIndirect.user.js"> Self Auto OBIndirect </a>
+<a href="https://github.com/Brikane/UFF_Tools/raw/main/AFTLiteAutoESO.user.js"> Self Auto EOS </a>
+<a href="https://aftlite-na.amazon.com/indirect_action/signin_indirect_action"> All Self-Auto track scripts work on this page </a>
 <h2></h2>
 
 <p>-----------------</p>
