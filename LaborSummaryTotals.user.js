@@ -1,7 +1,7 @@
     // ==UserScript==
-    // @name         LaborSummary Totals V1.4
-    // @namespace    https://github.com/Brikane/UFF_Tools/*
-    // @version      1.2 04/06/2022
+    // @name         LaborSummary Totals V1.5
+    // @namespace    http://tampermonkey.net/
+    // @version      1.5 12/11/2022
     // @description  Shows totals table for current pull, pull by X hours, graphing with a totals table and an ICQA graph, porject rate if end time is after NOW
     // @author       brikane @ UIL1
     // @match        https://aftlite-na.amazon.com/labor_tracking/labor_summary*
@@ -48,16 +48,16 @@
     var hoursIndexKey = 3;
     var unitsIndexKey = 2;
     var unitOBidKey = ["pack"];
-    var unitIBidKeys = ["stow", "receive2_direct", "receive_direct", "receive_ced", "transform", "transform_pick", "receive2"]; //"transform", "transform_pick"
+    var unitIBidKeys = ["stow", "receive2_direct", "receive_direct", "receive_ced", "transform", "transform_pick"]; //"transform", "transform_pick"
 
-    var ibFunctionKeys = ["stow", "receive2_direct", "receive_direct", "IBINDIRECT", "SPECINDIRECT", "receive2", "transform", "transform_pick" ];
+    var ibFunctionKeys = ["stow", "receive2_direct", "receive_direct", "IBINDIRECT", "SPECINDIRECT", "receive2" ];
     var obFunctionKeys = ["pack", "BATCHING", "pack_problem", "OB", "OBINDIRECT", "skip", "SORTER" ];
-    var ibIndirectFunctionKeys = ["IBINDIRECT", "adjust", "bulk_move", "cubiscan", "move-to", "receive_transfer", "stow_move", "update expiry"];
+    var ibIndirectFunctionKeys = ["recieve2","IBINDIRECT", "adjust", "bulk_move", "cubiscan", "move-to", "receive_transfer", "stow_move", "update expiry"];
     var obIndirectFunctionKeys = ["BATCHING", "pack_problem", "OB", "OBINDIRECT","skip", "SORTER", "BATCHING"];
     var bccFunctionKeys = ["bcc"];
     var indirectFunctionKeys = ["SPECINDIRECT", "ICQA", "ICQAINDIRECT", "BRK", "ADMN", "IDLE", "START", "WWHUDDLE", "damage", "dispose", "inventory", "unpack", "TRN", "TOINDIRECT", "ASM", "src", "removal"];
     var downtimeFunctionKeys = ["DOWNTIME"];
-    var extraHoursKeys = ["DOWNTIME", "ALTBIZ", "RENOPROJECTS"];
+    var extraHoursKeys = ["DOWNTIME", "ALTBIZ", "RENOPROJECTS","HAM", "EOS"];
 
     // pack NA case
     var packNAKey = "n/a";
@@ -523,18 +523,18 @@
             postMins = 60.0;
             console.log("End after now " + eHour + " to " + nowHour + " from " + sHour + " min: " + nowMin + " after:" + postMins);
          }else{
-            doProject = false; 
+            doProject = false;
             postMins = 0.0;
             console.log("End before now " + eHour + " to " + nowHour+ " from " + sHour+ " min: " + nowMin);
          }
 
          var estVal = 0.0;
          var preHours = (nowHour - sHour)*60.0;
-         
-         var curPercent = ((nowMin+preHours)/(preHours+postMins)); 
+
+         var curPercent = ((nowMin+preHours)/(preHours+postMins));
          if(curPercent == 0.0) curPercent = 0.000001;
          console.log("Percent: " + curPercent);
-          
+
          // Titles
          displayTableArray.push(["Category", "Actual", "Trending"]);
 
@@ -554,7 +554,7 @@
         if(totalOBUnitsValue > 0){
             tRate = (totalDPMOUnits/totalOBUnitsValue)* dpmoMultiplier;
         }
-        
+
         tRate = parseInt(tRate.toFixed(noDecimals));
         tRate = tRate.toLocaleString("en-US");
         displayTableArray.push(["DPMO", tRate, "-"]);
@@ -676,7 +676,7 @@
         // OB Unitsx
         tRate = 0;
         tRate = totalOBUnitsValue;
-        
+
         estVal = tRate
         if(doProject){
             estVal = tRate/curPercent;
@@ -684,13 +684,13 @@
         estVal = Number(estVal).toFixed(noDecimals);
         estVal = estVal.toLocaleString("en-US");
         tRate = tRate.toLocaleString("en-US");
-       
+
         displayTableArray.push(["OB Vol.", tRate, estVal]);
 
         // IB Units
         tRate = 0;
         tRate = totalIBUnitsValue;
-        
+
         estVal = tRate
         if(doProject){
             estVal = tRate/curPercent;
@@ -713,7 +713,7 @@
         tRate = totalHoursValue;
 
         tRate = tRate.toFixed(nnumRatioDecimals);
-        
+
         displayTableArray.push(["Total Hrs", tRate, tRate]);
         //displayTableArray.push(["Trending is ", "time left in ", "current hour"]);
     }
@@ -816,6 +816,7 @@
 
     function calcUPH(hours, obVol, ibVol, ibRate){
         if (ibRate == 0 ) ibRate = ibZeroRate;
+        console.log("UPH Calc: " + obVol + " /() " +hours + " - ( "+ ibVol + " - " + obVol + ") / " + ibRate + "))");
         return  obVol / (hours -( (ibVol-obVol) /ibRate));
     }
 
