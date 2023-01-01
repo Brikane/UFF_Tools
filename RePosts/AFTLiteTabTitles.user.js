@@ -5,6 +5,8 @@
 // @description  Change tab title to better reflect page
 // @author       grajef@ repost by @brikane
 // @match        https://aftlite-na.amazon.com/*
+// @downloadURL  https://raw.githubusercontent.com/Brikane/UFF_Tools/RePosts/master/AFTLiteTabTitles.user.js
+// @updateURL    https://raw.githubusercontent.com/Brikane/UFF_Tools/RePosts/master/AFTLiteTabTitles.user.js
 // @grant        none
 // ==/UserScript==
 
