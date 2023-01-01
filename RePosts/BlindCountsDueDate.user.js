@@ -6,6 +6,8 @@
 // @author       grajef@ Repost @brikane
 // @match        https://aftlite-na.amazon.com/bcc/assign*
 // @match        https://aftlite-portal.amazon.com/bcc_admin/assign*
+// @downloadURL  https://raw.githubusercontent.com/Brikane/UFF_Tools/RePosts/master/BlindCountsDueDate.user.js
+// @updateURL    https://raw.githubusercontent.com/Brikane/UFF_Tools/RePosts/master/BlindCountsDueDate.user.js
 // @grant        none
 // ==/UserScript==
 
