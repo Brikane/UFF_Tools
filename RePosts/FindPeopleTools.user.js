@@ -6,7 +6,8 @@
 // @author       grajef@ Repost by @brikane
 // @match        https://aftlite-na.amazon.com/labor_tracking/find_people*
 // @match        https://aftlite-portal.amazon.com/labor_tracking/find_people*
-// @downloadURL  https://github.com/JGray0705/UserScripts/raw/master/FindPeopleTools.user.js
+// @downloadURL  https://raw.githubusercontent.com/Brikane/UFF_Tools/RePosts/master/FindPeopleTools.user.js
+// @updateURL    https://raw.githubusercontent.com/Brikane/UFF_Tools/RePosts/master/FindPeopleTools.user.js
 // @grant        none
 // ==/UserScript==
 
