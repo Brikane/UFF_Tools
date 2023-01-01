@@ -5,8 +5,8 @@
 // @description  INSERT FOUND BAGS INTO FOOTER COMO LABOR PAGE
 // @author       jeyartil reposted by brikane 
 // @match        https://como-operations-dashboard-iad.iad.proxy.amazon.com/store/*/labor*
-// @downloadURL  https://github.com/Brikane/UFF_Tools/raw/main/ComoFindBags.user.js
-// @updateURL    https://github.com/Brikane/UFF_Tools/raw/main/ComoFindBags.user.js
+// @downloadURL  https://raw.githubusercontent.com/Brikane/UFF_Tools/RePosts/master/Find_Bags_Como.user.js
+// @updateURL    https://raw.githubusercontent.com/Brikane/UFF_Tools/RePosts/master/Find_Bags_Como.user.js
 // @icon         https://www.google.com/s2/favicons?domain=amazon.com-update-test
 // @grant        none
 // @require      https://unpkg.com/hotkeys-js/dist/hotkeys.min.js
