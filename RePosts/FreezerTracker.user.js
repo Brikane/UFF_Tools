@@ -3,9 +3,10 @@
 // @namespace    https://github.com/Brikane/UFF_Tools/new/main/RePosts
 // @version      7.0
 // @description  Tracks amount of time spent in frozen last 12 hours
-// @author       grajef@ jgray0705
+// @author       grajef@ jgray0705 repost by brikane
 // @match        https://aftlite-na.amazon.com/labor_tracking/find_people*
-// @downloadURL  https://github.com/JGray0705/UserScripts/raw/master/FreezerTracker.user.js
+// @downloadURL  https://raw.githubusercontent.com/Brikane/UFF_Tools/RePosts/master/FreezerTracker.user.js
+// @updateURL    https://raw.githubusercontent.com/Brikane/UFF_Tools/RePosts/master/FreezerTracker.user.js
 // @grant        none
 // ==/UserScript==
 
