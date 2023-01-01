@@ -8,7 +8,8 @@
 // @match        https://aftlite-na.amazon.com/labor_tracking/view_daily_detail*
 // @match        https://aftlite-na.amazon.com/labor_tracking/uph_drilldown*
 // @match        https://aftlite-portal.amazon.com/labor_tracking/view_daily_detail*
-// @downloadURL  https://github.com/JGray0705/UserScripts/raw/master/DateInputHelper.user.js
+// @downloadURL  https://raw.githubusercontent.com/Brikane/UFF_Tools/RePosts/master/DateInputHelper.user.js
+// @updateURL    https://raw.githubusercontent.com/Brikane/UFF_Tools/RePosts/master/DateInputHelper.user.js
 // @grant        none
 // ==/UserScript==
 
