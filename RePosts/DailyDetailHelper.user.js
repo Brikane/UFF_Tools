@@ -7,7 +7,8 @@
 // @match        https://aftlite-na.amazon.com/labor_tracking/view_daily_detail*
 // @match        https://aftlite-eu.amazon.com/labor_tracking/view_daily_detail*
 // @match        https://aftlite-nrt.amazon.com/labor_tracking/view_daily_detail*
-// @downloadURL  https://github.com/JGray0705/UserScripts/raw/master/DailyDetailHelper.user.js
+// @downloadURL  https://raw.githubusercontent.com/Brikane/UFF_Tools/RePosts/master/DailyDetailHelper.user.js
+// @updateURL    https://raw.githubusercontent.com/Brikane/UFF_Tools/RePosts/master/DailyDetailHelper.user.js
 // @grant        none
 // ==/UserScript==
 
