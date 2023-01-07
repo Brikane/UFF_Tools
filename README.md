@@ -30,7 +30,7 @@
 <p></p>
 <h2>Inbound Scripts</h2>
 <p><b><a href=""> TEXT </a></b></p>
-<p><b><a href=""> TEXT </a></b></p>
+<p><b><a href="https://github.com/Brikane/UFF_Tools/raw/main/RePosts/AFTLite_csXBulkMove.user.js"> Bulk csX Consolidation Tool </a></b></p>
 <p></p>
 <h2>ICQA Scripts</h2>
 <p><b><a href="https://github.com/Brikane/UFF_Tools/raw/main/RePosts/BlindCountsDueDate.user.js"> BBC Due Date Tool </a></b></p>
