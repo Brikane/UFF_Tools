@@ -1,5 +1,5 @@
     // ==UserScript==
-    // @name         LaborSummary Totals V1.5
+    // @name         LaborSummary Totals V1.6
     // @namespace    http://tampermonkey.net/
     // @version      1.5 12/11/2022
     // @description  Shows totals table for current pull, pull by X hours, graphing with a totals table and an ICQA graph, porject rate if end time is after NOW
@@ -8,6 +8,8 @@
     // @icon         https://www.google.com/s2/favicons?domain=amazon.com
     // @require      https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.min.js
     // @resource     CHART_JS_CSS https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.min.css
+    // @downloadURL  https://github.com/Brikane/UFF_Tools/raw/main/LaborSummaryTotals.user.js       
+    // @updateURL    https://github.com/Brikane/UFF_Tools/raw/main/LaborSummaryTotals.user.js     
     // @grant        GM_addStyle
     // ==/UserScript==
 
@@ -50,7 +52,7 @@
     var unitOBidKey = ["pack"];
     var unitIBidKeys = ["stow", "receive2_direct", "receive_direct", "receive_ced", "transform", "transform_pick"]; //"transform", "transform_pick"
 
-    var ibFunctionKeys = ["stow", "receive2_direct", "receive_direct", "IBINDIRECT", "SPECINDIRECT", "receive2" ];
+    var ibFunctionKeys = ["stow", "receive2_direct", "receive_direct", "IBINDIRECT", "SPECINDIRECT", "receive2", "transform", "transform_pick" ];
     var obFunctionKeys = ["pack", "BATCHING", "pack_problem", "OB", "OBINDIRECT", "skip", "SORTER" ];
     var ibIndirectFunctionKeys = ["recieve2","IBINDIRECT", "adjust", "bulk_move", "cubiscan", "move-to", "receive_transfer", "stow_move", "update expiry"];
     var obIndirectFunctionKeys = ["BATCHING", "pack_problem", "OB", "OBINDIRECT","skip", "SORTER", "BATCHING"];
