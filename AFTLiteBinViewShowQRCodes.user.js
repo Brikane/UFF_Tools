@@ -1,12 +1,12 @@
 // ==UserScript==
 // @name         AFTLiteBinViewShowQRCodes
 // @namespace    https://github.com/Brikane/UFF_Tools
-// @version      1.0
+// @version      1.1
 // @description  Shows Location and ASIN QR Codes
 // @author       brikane@
 // @match        https://aftlite-na.amazon.com/inventory/view_inventory_at*
-// @downloadURL  https://github.com/Brikane/UFF_Tools/raw/master/AFTLiteBinViewShowQRCodes.user.js
-// @updateURL    https://github.com/Brikane/UFF_Tools/raw/master/AFTLiteBinViewShowQRCodes.user.js
+// @match        https://aftlite-portal.amazon.com/inventory/view_inventory_at*
+// @downloadURL  https://github.com/Brikane/UFF_Tools/raw/master/AFTLiteShowQRCodes.user.js
 // @grant        none
 // ==/UserScript==
 // Vars
@@ -18,7 +18,8 @@ var qrImgUrlStart = 'https://chart.apis.google.com/chart?cht=qr&chs=100x100&chld
 var asinLength = 10;
 var ASINspaceing  = 7
 
-var endTableRowIgnore = 4;
+var altTitleStart = 22;
+var altTitleEnd = '[';
 var location_name_Id = 'location_name';
 
 var localTag = "table";
@@ -38,17 +39,19 @@ function addLocationQRCode(){
 
     const queryString = window.location.search;
     const urlParams = new URLSearchParams(queryString);
-    const param_location_name = urlParams.get(location_name_Id);
+    var param_location_name = urlParams.get(location_name_Id);
     console.log(param_location_name);
     
     var titleEl = document.getElementsByTagName(asinTag);
-    /** 
-    var titleNameEl = titleEl[0] ;
-    var itemName = titleNameEl.innerHTML;
-     itemName = itemName.trim();
-     itemName = itemName.slice(itemName.length-asinLength,itemName.length);
-    //itemName = itemName.replace(/\s/g, '+');
-    */
+    
+    if(param_location_name == null){
+        var titleNameEl = titleEl[0] ;
+        var itemName = titleNameEl.innerHTML;
+        itemName = itemName.trim();
+        itemName = itemName.slice(altTitleStart,itemName.indexOf(altTitleEnd)).trim();
+        console.log("Alt: " + itemName);
+        param_location_name = itemName
+    }
 
     var qrImage = createQRCode(param_location_name);
     titleEl[0].appendChild(qrImage);
@@ -56,26 +59,26 @@ function addLocationQRCode(){
 
 function addASIN_QRCode(){
     console.log("FindingASINS...");
-    var table = document.getElementsByTagName(localTag)[1];
-    var numRows = table.rows.length;
-    for(let row of table.rows) {
-        if (row.rowIndex > numRows-endTableRowIgnore){
-            var newCell = row.insertCell(cellIndex);
-            newCell.appendChild(document.createTextNode(" "));
-        } else if (row.rowIndex % ASINspaceing == 0    ){
-            let cell = row.cells[0];
-            var loc = cell.innerHTML.trim();
-            loc = loc.slice(loc.indexOf('>')+1,loc.length);
-            loc = loc.slice(0, loc.indexOf('<'));
-            console.log(loc);
-            var qrCode = createQRCode(loc);
-            var newCell = row.insertCell(cellIndex);
-            newCell.appendChild(qrCode);
-        }else {
-            var newCell = row.insertCell(cellIndex);
-            newCell.appendChild(document.createTextNode(" "));
+    try{
+        var table = document.getElementsByTagName(localTag)[1];
+        for(let row of table.rows) {
+            if (row.rowIndex % ASINspaceing == 0    ){
+                let cell = row.cells[0];
+                var loc = cell.innerHTML.trim();
+                loc = loc.slice(loc.indexOf('>')+1,loc.length);
+                loc = loc.slice(0, loc.indexOf('<'));
+                console.log(loc);
+                var qrCode = createQRCode(loc);
+                var newCell = row.insertCell(cellIndex);
+                newCell.appendChild(qrCode);
+            }else {
+                var newCell = row.insertCell(cellIndex);
+                newCell.appendChild(document.createTextNode(" "));
+            }
         }
-    }
+    }catch(err) {
+       console.log("Error: " + err);
+      }
 }
 
 function createQRCode(qrCodeStr){
