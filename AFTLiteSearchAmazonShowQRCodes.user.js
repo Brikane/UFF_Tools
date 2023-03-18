@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         AFTLiteSearchAmazonShowQRCodes
 // @namespace    https://github.com/Brikane/UFF_Tools
-// @version      2.1
+// @version      2.2
 // @description  Shows Location and ASIN QR Codes
 // @author       brikane@
 // @match        https://aftlite-na.amazon.com/inventory/view_inventory_for_asin*
