@@ -23,7 +23,7 @@ var asinLength = 10;
 var localTag = "table";
 var cellIndex = 0;
 
-var endTableRowIgnore = 4;
+var endTableRowIgnore = 5;
 
 // Main
 (function() {
