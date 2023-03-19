@@ -6,6 +6,8 @@
 // @author       You
 // @match        https://aftlite-na.amazon.com/wms/tote_slam_prompt*
 // @icon         data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==
+// @downloadURL https://github.com/Brikane/UFF_Tools/raw/main/AFTLitePS_SpooCode.user.js
+// @UpdateURL    https://github.com/Brikane/UFF_Tools/raw/main/AFTLitePS_SpooCode.user.js
 // @grant        none
 // ==/UserScript==
 
